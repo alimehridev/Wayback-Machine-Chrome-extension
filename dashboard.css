@@ -107,13 +107,15 @@ body {
 }
 
 #filterBox { 
-    display: none; 
-    margin-top: 10px; 
-    border: 1px solid #ccc; 
-    padding: 10px; 
-    border-radius: 6px; 
+    display: none;
+    margin-top: 15px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 6px;
     background: #fafafa;
     position: absolute;
+    z-index: 1000;
+    margin-left: 10px;
 }
 #toggleFilterBoxBtn {
     background: none;

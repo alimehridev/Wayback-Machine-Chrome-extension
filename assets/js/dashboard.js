@@ -51,5 +51,5 @@ function getCustomFilters() {
       filters.push(`filter=${type}:${value}`);
     }
   });
-  return filters;
+  return filters.join("&");
 }
