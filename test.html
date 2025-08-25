@@ -1,0 +1,16 @@
+<div id="list" style="height:400px; overflow:auto;"></div>
+
+<script>
+
+
+// ---- استفاده ----
+const data = Array.from({ length: 10000000 }, (_, i) => `Row ${i+1}`);
+createVirtualList(document.getElementById('list'), data, {
+  itemHeight: 20,
+  renderItem: (item) => {
+    const div = document.createElement('div');
+    div.textContent = item;
+    return div;
+  }
+});
+</script>

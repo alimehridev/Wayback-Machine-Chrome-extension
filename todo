@@ -1,0 +1,2 @@
+1. result should contains timestamp even if user does not want.
+2. If request failed reset the send request btn

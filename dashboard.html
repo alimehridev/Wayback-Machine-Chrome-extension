@@ -1,0 +1,145 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Wayback Machine Dashboard</title>
+    <link rel="stylesheet" href="dashboard.css">
+    <style>
+      #custom-filter-box { 
+        margin: 10px 0; 
+        border: 1px solid #ccc; 
+        padding: 12px; 
+        border-radius: 6px; 
+        background: #fafafa;
+      }
+      .custom-filter-row { 
+        display: flex; 
+        gap: 8px; 
+        margin-bottom: 8px; 
+        align-items: center;
+      }
+      .custom-filter-row select,
+      .custom-filter-row input { 
+        padding: 6px; 
+        border: 1px solid #ccc; 
+        border-radius: 4px; 
+        flex: 1;
+      }
+      .custom-filter-row button { 
+        padding: 6px 10px; 
+        border: none; 
+        border-radius: 4px; 
+        cursor: pointer; 
+        background: #ef4444; 
+        color: #fff; 
+      }
+      .custom-filter-row button:hover { 
+        background: #dc2626; 
+      }
+      #add-custom-filter { 
+        padding: 6px 12px; 
+        border: none; 
+        border-radius: 6px; 
+        cursor: pointer; 
+        background:#3b82f6; 
+        color:#fff; 
+        margin-top: 6px;
+        width: 100%;
+      }
+      #add-custom-filter:hover { 
+        background:#2563eb; 
+      }
+    </style>
+  </head>
+  <body>
+    <div class="main">
+      <div class="tabs active_tab" id="snapshots_tab">
+          <div id="copyright" style="text-align: right">Made with <span style="color: red;">❤</span> by <a href="https://github.com/alimehridev" target="_blank">alimehridev</a></div>
+          <div class="input-area">
+            <input
+              autofocus
+              id="target"
+              name="target"
+              type="text"
+              value=""
+              placeholder="Enter your target domain to get snapshots..." 
+            />
+            <span id="add_start_to_target" style="color: red; text-decoration: underline; cursor: pointer;">Notice: to get snapshots from all files add '*.' before and '/*' after your target, for example: '*.google.com/*' [Click on me to do for you]</span>
+            <span id="get_snapshots">Get Data</span>
+            <button id="toggleFilterBoxBtn">Filters</button>
+            <div id="filterBox">
+                <fieldset style="display: flex; flex-direction: column;">
+                    <legend title='The "collapse" parameter reduces duplicate results by grouping adjacent records
+with the same value in the chosen field. For example, "collapse=digest" keeps
+only the first record for each unique digest'>collapse</legend>
+                    <div style="display: flex;">
+                        <label><input title='' type="radio" name="collapse" value=""> None</label><br>
+                        <label><input title='Canonicalized and reversed form of the original URL, used for indexing.
+' type="radio" name="collapse" value="urlkey"> urlkey</label><br>
+                        <label><input title='Date and time of the capture in YYYYMMDDhhmmss format.
+' type="radio" name="collapse" value="timestamp"> timestamp</label><br>
+                        <label><input title='The original URL exactly as it was crawled.
+' type="radio" name="collapse" value="original"> original</label><br>
+                        <label><input title='The MIME type of the captured content (e.g., text/html, image/png).
+' type="radio" name="collapse" value="mimetype"> mimetype</label><br>
+                        <label><input title='The HTTP response status code returned when archived.
+' type="radio" name="collapse" value="statuscode"> statuscode</label><br>
+                        <label><input title='A hash (checksum) of the content, used to detect duplicates.
+' type="radio" name="collapse" value="digest" checked> digest</label><br>
+                        <label><input title='The size of the captured resource in bytes.' type="radio" name="collapse" value="length"> length</label><br>
+                    </div>
+                    <div style="margin-top: 5px;">
+                        
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <legend title='The "columns" parameter defines which fields are returned in the query results.  
+For example, "columns=timestamp,original" will only include the capture date and  
+the original URL in the output instead of all available fields.'>columns</legend>
+                    <label><input title="Canonicalized and reversed form of the original URL, used for indexing.
+" checked type="checkbox" name="columns" value="urlkey"> urlkey</label><br>
+                    <label><input title="Date and time of the capture in YYYYMMDDhhmmss format.
+" checked type="checkbox" name="columns" value="timestamp"> timestamp</label><br>
+                    <label><input title="The original URL exactly as it was crawled.
+" checked type="checkbox" name="columns" value="original"> original</label><br>
+                    <label><input title="The MIME type of the captured content (e.g., text/html, image/png).
+" checked type="checkbox" name="columns" value="mimetype"> mimetype</label><br>
+                    <label><input title="The HTTP response status code returned when archived.
+" checked type="checkbox" name="columns" value="statuscode"> statuscode</label><br>
+                    <label><input title="A hash (checksum) of the content, used to detect duplicates.
+" checked type="checkbox" name="columns" value="digest"> digest</label><br>
+                    <label><input title="The size of the captured resource in bytes." checked type="checkbox" name="columns" value="length"> length</label><br>
+                </fieldset>
+                <div id="custom-filter-box">
+                  <div id="custom-filter-container"></div>
+                  <button id="add-custom-filter" type="button">Add new filter</button>
+                </div>
+            </div>
+          </div>
+          <div class="result-box" id="snapshot_resultBox"> 
+          </div>
+          <div id="snapshot_resultBox_numbers" style="text-align: right;">Number of snapshots: 0</div>
+          <div id="snapshot_resultBox_copy">
+              <div id="snapshot_resultBox_copy_btn" style="text-align: right;">Copy all to clipboard</div>
+          </div>
+        </div>
+        <div class="tabs" id="urls_tab">
+            <div class="input-area">
+                <input autofocus id="snapshot_number" name="snapshot_number" type="text" placeholder="Enter snapshot to get URLs..." />
+                <span id="get_urls">Get URLs</span>
+            </div>
+            <div class="result-box" id="resultBox">
+            </div>
+            <div id="" style="text-align: right;">Number of items: 0</div>
+            <div id="">
+                <div id="" style="text-align: right;">Copy all to clipboard</div>
+            </div>
+        </div>
+    </div>
+    <script src="assets/js/helpers.js"></script>
+    <script src="assets/js/dashboard.js"></script>
+    <script src="assets/js/snapshots.js"></script>
+  </body>
+</html>
