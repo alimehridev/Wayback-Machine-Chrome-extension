@@ -76,18 +76,12 @@ with the same value in the chosen field. For example, "collapse=digest" keeps
 only the first record for each unique digest'>collapse</legend>
                     <div style="display: flex;">
                         <label><input title='' type="radio" name="collapse" value=""> None</label><br>
-                        <label><input title='Canonicalized and reversed form of the original URL, used for indexing.
-' type="radio" name="collapse" value="urlkey"> urlkey</label><br>
-                        <label><input title='Date and time of the capture in YYYYMMDDhhmmss format.
-' type="radio" name="collapse" value="timestamp"> timestamp</label><br>
-                        <label><input title='The original URL exactly as it was crawled.
-' type="radio" name="collapse" value="original"> original</label><br>
-                        <label><input title='The MIME type of the captured content (e.g., text/html, image/png).
-' type="radio" name="collapse" value="mimetype"> mimetype</label><br>
-                        <label><input title='The HTTP response status code returned when archived.
-' type="radio" name="collapse" value="statuscode"> statuscode</label><br>
-                        <label><input title='A hash (checksum) of the content, used to detect duplicates.
-' type="radio" name="collapse" value="digest" checked> digest</label><br>
+                        <label><input title='Date and time of the capture in YYYYMMDDhhmmss format.' type="radio" name="collapse" value="timestamp"> timestamp</label><br>
+                        <label><input title='The original URL exactly as it was crawled.' type="radio" name="collapse" value="original"> original</label><br>
+                        <label><input title='Canonicalized and reversed form of the original URL, used for indexing.' type="radio" name="collapse" value="urlkey"> urlkey</label><br>
+                        <label><input title='The MIME type of the captured content (e.g., text/html, image/png).' type="radio" name="collapse" value="mimetype"> mimetype</label><br>
+                        <label><input title='The HTTP response status code returned when archived.' type="radio" name="collapse" value="statuscode"> statuscode</label><br>
+                        <label><input title='A hash (checksum) of the content, used to detect duplicates.' type="radio" name="collapse" value="digest" checked> digest</label><br>
                         <label><input title='The size of the captured resource in bytes.' type="radio" name="collapse" value="length"> length</label><br>
                     </div>
                     <div style="margin-top: 5px;">
@@ -95,21 +89,14 @@ only the first record for each unique digest'>collapse</legend>
                     </div>
                 </fieldset>
                 <fieldset>
-                    <legend title='The "columns" parameter defines which fields are returned in the query results.  
-For example, "columns=timestamp,original" will only include the capture date and  
+                    <legend title='The "columns" parameter defines which fields are returned in the query results. For example, "columns=timestamp,original" will only include the capture date and  
 the original URL in the output instead of all available fields.'>columns</legend>
-                    <label><input title="Canonicalized and reversed form of the original URL, used for indexing.
-" checked type="checkbox" name="columns" value="urlkey"> urlkey</label><br>
-                    <label><input title="Date and time of the capture in YYYYMMDDhhmmss format.
-" checked type="checkbox" name="columns" value="timestamp"> timestamp</label><br>
-                    <label><input title="The original URL exactly as it was crawled.
-" checked type="checkbox" name="columns" value="original"> original</label><br>
-                    <label><input title="The MIME type of the captured content (e.g., text/html, image/png).
-" checked type="checkbox" name="columns" value="mimetype"> mimetype</label><br>
-                    <label><input title="The HTTP response status code returned when archived.
-" checked type="checkbox" name="columns" value="statuscode"> statuscode</label><br>
-                    <label><input title="A hash (checksum) of the content, used to detect duplicates.
-" checked type="checkbox" name="columns" value="digest"> digest</label><br>
+                    <label><input title="Date and time of the capture in YYYYMMDDhhmmss format." checked type="checkbox" name="columns" value="timestamp"> timestamp</label><br>
+                    <label><input title="The original URL exactly as it was crawled." checked type="checkbox" name="columns" value="original"> original</label><br>
+                    <label><input title="Canonicalized and reversed form of the original URL, used for indexing." checked type="checkbox" name="columns" value="urlkey"> urlkey</label><br>
+                    <label><input title="The MIME type of the captured content (e.g., text/html, image/png)." checked type="checkbox" name="columns" value="mimetype"> mimetype</label><br>
+                    <label><input title="The HTTP response status code returned when archived." checked type="checkbox" name="columns" value="statuscode"> statuscode</label><br>
+                    <label><input title="A hash (checksum) of the content, used to detect duplicates." checked type="checkbox" name="columns" value="digest"> digest</label><br>
                     <label><input title="The size of the captured resource in bytes." checked type="checkbox" name="columns" value="length"> length</label><br>
                 </fieldset>
                 <div id="custom-filter-box">

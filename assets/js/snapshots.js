@@ -27,14 +27,7 @@ document.getElementById("get_snapshots").addEventListener("click", () => {
         alert("You should select a column at least in filters")
         return
     }
-    
-    if(filters.columns.includes("original") == false){
-        filters.columns = "original," + filters.columns
-    }
-    if(filters.columns.includes("timestamp") == false){
-        filters.columns = "timestamp," + filters.columns
-    }
-
+    filters.columns = [...new Set(["timestamp", "original"].concat(filters.columns.split(",")))].join(",")
     let xhr = new XMLHttpRequest();
     let requestURL = filters.collapse ? `http://web.archive.org/cdx/search/cdx?url=${domain}&collapse=${filters.collapse}&fl=${filters.columns}&${filters.customFilter}` : `http://web.archive.org/cdx/search/cdx?url=${domain}&fl=${filters.columns}&${filters.customFilter}`
     xhr.open("GET", requestURL, true);
@@ -109,6 +102,12 @@ document.getElementById("add_start_to_target").addEventListener("click", (el) =>
 
 document.getElementById("snapshot_resultBox_copy_btn").addEventListener("click", (e) => {
     e.target.innerText = "Copied"
+    let snapshots_string_array = snapshots_string.split("\n")
+    let columns = [...new Set(["timestamp", "original"].concat(Object.values(document.getElementsByName("columns")).filter(i => i.checked).map(i => i.value)))]
+    snapshots_string_array.forEach(i => {
+        console.log(Object.values(get_item_object(i, columns)))
+    })
+    
     copyToClipboard(snapshots_string)
     setTimeout(() => {
         e.target.innerText = "Copy all to clipboard"
