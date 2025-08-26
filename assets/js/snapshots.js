@@ -33,7 +33,7 @@ document.getElementById("get_snapshots").addEventListener("click", () => {
     xhr.open("GET", requestURL, true);
     let result_box = document.getElementById("snapshot_resultBox")
     result_box.innerText = ""
-    document.getElementById("snapshot_resultBox_numbers").innerText = `Number of snapshots: ${document.getElementById("snapshot_resultBox").childElementCount}`
+    document.getElementById("snapshot_resultBox_numbers").innerText = `Number of items: ${document.getElementById("snapshot_resultBox").childElementCount}`
     document.getElementById("get_snapshots").innerText = `Sending request to archive.org...`
     xhr.onreadystatechange = function() {
         if (xhr.readyState === 4 && xhr.status === 200){
@@ -64,7 +64,7 @@ document.getElementById("get_snapshots").addEventListener("click", () => {
                     return span;
                 }
             });
-            document.getElementById("snapshot_resultBox_numbers").innerText = `Number of snapshots: ${response.length}`
+            document.getElementById("snapshot_resultBox_numbers").innerText = `Number of items: ${response.length}`
         }
     }
     xhr.onprogress = function(event){
@@ -101,17 +101,26 @@ document.getElementById("add_start_to_target").addEventListener("click", (el) =>
 })
 
 document.getElementById("snapshot_resultBox_copy_btn").addEventListener("click", (e) => {
-    e.target.innerText = "Copied"
-    let snapshots_string_array = snapshots_string.split("\n")
-    let columns = [...new Set(["timestamp", "original"].concat(Object.values(document.getElementsByName("columns")).filter(i => i.checked).map(i => i.value)))]
-    snapshots_string_array.forEach(i => {
-        console.log(Object.values(get_item_object(i, columns)))
-    })
-    
-    copyToClipboard(snapshots_string)
+    e.target.innerText = "Processing..."
     setTimeout(() => {
-        e.target.innerText = "Copy all to clipboard"
-    }, 500)
+        let snapshots_string_array = snapshots_string.split("\n")
+        let columns = [...new Set(["timestamp", "original"].concat(Object.values(document.getElementsByName("columns")).filter(i => i.checked).map(i => i.value)))]
+        let user_columns = Object.values(document.getElementsByName("columns")).filter(i => i.checked).map(i => i.value)
+        let exclude_columns = columns.filter(i => !user_columns.includes(i))
+        let result = ""
+        snapshots_string_array.forEach(i => {
+            let obj = get_item_object(i, columns)
+            exclude_columns.forEach(c => {
+                delete obj[c]
+            })
+            result = result + Object.values(obj).join(" ") + "\n"
+        })
+        e.target.innerText = "Copied"
+        copyToClipboard(result)
+        setTimeout(() => {
+            e.target.innerText = "Copy all to clipboard"
+        }, 500)
+    }, 200)
 })
 const toggleBtn = document.getElementById('toggleFilterBoxBtn');
 const filterBox = document.getElementById('filterBox');
